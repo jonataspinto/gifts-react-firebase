@@ -1,143 +1,109 @@
 import React, { Component } from 'react'
-import firebase from '../../Firebase'
-import Gifted from '../../models/Gifted'
-import Item from '../../models/Item'
-import Button from '../../components/Button'
-import Input from '../../components/Input/input'
-import Card from '../../components/Card'
-import Modal from '../../components/Modal'
-// import {Link} from 'react-router-dom'
-import { HomeContainer, ButtonAdd } from '../../styles'
-import { Icon } from '@material-ui/core';
+import {firebase}from '../../Firebase/index.js'
 
-import {Lang} from '../../pt'
-import Loading from '../../components/Loading'
+import Button from '../../components/Button'
+// import Input from '../../components/Input/input'
+// import Card from '../../components/Card'
+// import Modal from '../../components/Modal'
+import { HomeContainer } from '../../styles'
 
 
 export default class Home extends Component {
 
-    state ={
+   constructor(props){
+       super(props)
+
+       this.state = {
         items:[],
-        gifteds: Gifted,
-        gifted: new Gifted(),
         modalWin: false,
-        loading: true,
-        name: ""
+        name: "",
+        isLogged: false,
+        user: null
     }
+   }
 
     componentDidMount(){
-        const req = firebase.database().ref('gifted')
-        req.on('value', (snapshot)=>{
-            let res = snapshot.val()
-            // console.log(res)
-            this.setState({gifteds: res, loading: false})
-            // console.log(snapshot.val())
-            console.log(this.state.gifted)
-            console.log(this.state.gifteds);
-            
-        })
+        this.authListener()
     }
 
     toggleModal(){
         this.setState({modalWin: !this.state.modalWin})
-        console.log("close")
     }
 
-    onChange = (event)=>{
-        const gifted = Object.assign({}, this.state.gifted)
-        const input = event.target.name
-        gifted[input] = event.target.value
-        this.setState({gifted: gifted})
-        
-        // this.setState({gifted: {name:event.target.value}})
-        // console.log(gifted)
-        // console.log(this.state.gifted);
-        
-
+    authListener(){
+        firebase.auth().onAuthStateChanged((user)=> {        
+            if (user) {
+                this.setState({user})
+              console.log("User is signed in.")
+              console.log(this.state.user);
+            }
+        });
     }
 
-    onSubmit = (event)=>{
-        event.preventDefault()
-        console.log(this.state.gifted);
-        // console.log(item);
-        // let name = "cadeira"
-        // let imgSrc= "https://tokstok.vteximg.com.br/arquivos/ids/1830441-670-670/Cadeira-Infantil-Amarelo-Country.jpg?v=637015836420570000"
-        // let item = new Item(name, imgSrc)
-        // console.log(item);
-        // this.setState(state =>{state.items.push(item)})
-        // console.log(this.state.items);
-        // const gifted = Object.assign({}, this.state.gifted)
-        // gifted.items = item
-        // console.log(gifted);
-        // console.log(this.state.gifteds);
-        
-        
-        // firebase.database().ref('gifted').push(gifted)
-
-
-        // this.setState(state => {state.gifted.items.push(item)})
-
-        console.log(this.state.gifted);
-        
-        this.insertGifted()
-        this.toggleModal()        
+    loginSocial(){
+        var provider = new firebase.auth.FacebookAuthProvider();
+        firebase
+          .auth()
+          .signInWithPopup(provider)
+          .then((result) =>{
+            // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+            var token = result.credential.accessToken;
+            // The signed-in user info.
+            const user = result.user;
+            console.log(user);
+            this.setState({user})
+          })
+          .catch(function(error) {
+            // // Handle Errors here.
+            // var errorCode = error.code;
+            // var errorMessage = error.message;
+            // // The email of the user's account used.
+            // var email = error.email;
+            // // The firebase.auth.AuthCredential type that was used.
+            // var credential = error.credential;
+            // // ...
+        });
     }
 
-    insertGifted(){
-        firebase.database().ref('gifted').push(this.state.gifted)
+    logOutFacebook(){
+        firebase.auth().signOut().then(function(result) {
+            console.log("logout successful")
+        }).catch(function(error) {
+            console.log(error)
+        });
     }
-
+    
     render() {
-        const { gifteds, gifted, modalWin, loading} = this.state
+       
         return (
-            <HomeContainer>  {
-                loading ? 
-                <Loading/> :
-                           
-                Object.keys(gifteds).map((key)=>{
-                    return gifteds[key].name &&
-                    <Card
-                        imgSrc={gifteds[key].imgSrc}
-                        value = {gifteds[key].name}
-                        fontSize="18px"
-                        backgroundBtn= "#bababa"
-                        to={{pathname:"/giftlist", state:{ giftedKey: key} }}
-                    />
-                })}
+            <HomeContainer>  
+              { this.state.user ? <>
+                <Button 
+               value = {"Criar Lista"}
+               fontSize="18px"
+               backgroundBtn= "#bababa"
+               to={{pathname:"/gifted" ,user:this.state.user}}
+            //    action={()=>{this.loginSocial()}}
+                ></Button>
 
-                <Modal showModal={modalWin}>
-                    <h1>{Lang.welcomeGifted}</h1>
-                    <Input
-                        type="text"
-                        name="name"
-                        value={gifted.name}
-                        onChange={this.onChange}
-                    />
-
-                    <br/>
-
-                    <Input
-                        type="text"
-                        name="imgSrc"
-                        value={gifted.imgSrc}
-                        onChange={this.onChange}
-                    />
-
-                    <Button
-                    action={this.onSubmit} 
-                    value={Lang.create} 
-                    fontSize={"18px"} 
-                    backgroundBtn={"#bababa"}
-                    />      
-                </Modal>
-
-                { loading ||
-                    <ButtonAdd onClick={()=>{this.toggleModal()}}>
-                    <Icon className={'fa fa-plus-circle'}  style={{ fontSize: 60, color: 'action' }}>
-                        add_circle
-                    </Icon>
-                </ButtonAdd> }  
-                  
+            <Button 
+               value = {"Sair"}
+               fontSize="18px"
+               backgroundBtn= "#bababa"
+            //    to={{pathname:"/gifted"}}
+               action={()=>{this.logOutFacebook()}}
+                ></Button>
+              </>
+                :
+                <Button 
+               value = {"Login Facebook"}
+               fontSize="18px"
+               backgroundBtn= "#bababa"
+            //    to={{pathname:"/gifted"}}
+               action={()=>{this.loginSocial()}}
+                ></Button>
+                
+            }
             </HomeContainer>
         )
     }

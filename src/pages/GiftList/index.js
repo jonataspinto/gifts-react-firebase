@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import firebase from '../../Firebase'
+import firebase from '../../Firebase/firebase.js'
 import Loading from '../../components/Loading'
 import Card from '../../components/Card'
 import Modal from '../../components/Modal'
 import Button from '../../components/Button'
 import Input from '../../components/Input/input'
 import Item from '../../models/Item'
-import {GiftListContainer, ButtonAdd, ButtonClose, Form} from '../../styles'
+import {GiftListContainer, ButtonAdd, Form} from '../../styles'
 import {Lang} from '../../pt'
 import { Icon } from '@material-ui/core';
 

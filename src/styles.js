@@ -1,5 +1,19 @@
 import styled from 'styled-components'
-import{ darken } from 'polished'
+import{ darken, lighten } from 'polished'
+
+export const Navbar = styled.nav`    
+    background-color: ${lighten(0.50, "black")};
+    ul {
+        display: flex;
+        list-style: none;
+        li {
+            padding: 10px
+            &:active{
+                background-color: ${lighten(0.75, "black")};
+            }
+        }
+    }
+`
 
 export const Container = styled.div` 
     display: flex;
@@ -19,7 +33,9 @@ export const Form = styled(Container)`
 export const HomeContainer = styled(Container)`
     
 `
+export const GiftedPage = styled(Container)`
 
+`
 export const GiftListContainer = styled(Container)`
     
 `
