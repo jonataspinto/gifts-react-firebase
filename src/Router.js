@@ -5,6 +5,7 @@ import Home from './pages/Home/home';
 import GiftList from './pages/GiftList';
 import Nav from './components/NavBar';
 import GiftedContainer from './pages/Gifted';
+import Login from './pages/Login/login.js';
 
 export default function Routers() {
   return (
@@ -12,7 +13,8 @@ export default function Routers() {
       <Nav routes={['home', 'gifted']} />
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/home" exact component={Home} />
+        <Route path="/home" component={Home} />
+        <Route path="/login" component={Login} />
         <Route path="/giftlist" component={GiftList} />
         <Route path="/gifted" component={GiftedContainer}/>
       </Switch>

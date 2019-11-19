@@ -1,13 +1,20 @@
 import styled from 'styled-components'
 import{ darken, lighten } from 'polished'
+import backgroundList from './assets/img/backgroundList.jpg'
+
+// cores-> #6d7993, #d5d5d5, #96858f, #9099a2
 
 export const Navbar = styled.nav`    
-    background-color: ${lighten(0.50, "black")};
+    background-color: #6d7993;
+    height:60px;
+    display: flex;
+    align-items: center;
     ul {
         display: flex;
         list-style: none;
         li {
-            padding: 10px
+            padding: 10px;
+            color: white;
             &:active{
                 background-color: ${lighten(0.75, "black")};
             }
@@ -20,7 +27,7 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
     max-width: 100vw;
-    min-height: 100vh;
+    height: 100vh;
     flex-wrap: wrap;
 `
 export const Form = styled(Container)`
@@ -31,13 +38,22 @@ export const Form = styled(Container)`
 `
 
 export const HomeContainer = styled(Container)`
-    
+    background-image: url(${backgroundList});
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: calc(100vh - 60px)    
 `
 export const GiftedPage = styled(Container)`
 
 `
 export const GiftListContainer = styled(Container)`
     
+`
+export const LoginContainer = styled(Container)`
+
+    background-color: ${lighten(0.12, "#d5d5d5")}
 `
 
 export const BUTTON = styled.button` 
