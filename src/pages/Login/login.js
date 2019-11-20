@@ -1,40 +1,34 @@
-import React, {useState}from 'react';
-import {firebase} from '../../Firebase/index.js'
+import React, {useState, useEffect}from 'react';
 import { LoginContainer } from '../../styles'
+import FacebookIcon from '@material-ui/icons/Facebook';
+import Button from '../../components/Button'
+import { Redirect } from 'react-router-dom'
+import { LoginFacebook , userAuthenticated} from '../../auth'
 
+const  Login = ()=>{
+    const [user, setUser] = useState(false);
 
-const Login = ()=> {
+    useEffect(()=>{ setUser(userAuthenticated())},[])
+
     return (
-        <LoginContainer>
-            
-        </LoginContainer>        
+         <LoginContainer>
+             {user && <Redirect to={{pathname: '/home'}} />}
+
+            <section>
+                <h3>Faça seu Login</h3>
+                <Button
+                    action={()=>{LoginFacebook()}}
+                    fontSize={"18px"} 
+                    backgroundBtn={"#3b5998"}
+                    color={'#fff'}
+                > 
+                <FacebookIcon style={{color: '#fff'}} />
+                <h4>Continuar</h4>
+                </Button>
+            </section>
+
+        </LoginContainer>
     );
 }
-
-// const LoginSocial = ()=>{
-//     const [user, setUser] = useState(
-//         ''
-//     );
-
-//     let provider = new firebase.auth.FacebookAuthProvider();
-//     firebase
-//       .auth()
-//       .signInWithPopup(provider)
-//       .then((result) =>{
-//         const user = result.user;
-//         console.log(user);
-//         setUser({user})
-//       })
-//       .catch(function(error) {
-//         // // Handle Errors here.
-//         // var errorCode = error.code;
-//         // var errorMessage = error.message;
-//         // // The email of the user's account used.
-//         // var email = error.email;
-//         // // The firebase.auth.AuthCredential type that was used.
-//         // var credential = error.credential;
-//         // // ...
-//     });
-// }
 
 export default Login

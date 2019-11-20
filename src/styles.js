@@ -11,7 +11,10 @@ export const Navbar = styled.nav`
     align-items: center;
     ul {
         display: flex;
+        align-items: center;
+        justify-content: space-between;
         list-style: none;
+        width: 100%;
         li {
             padding: 10px;
             color: white;
@@ -27,7 +30,8 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
     max-width: 100vw;
-    height: 100vh;
+    min-height: calc(100vh - 60px);
+
     flex-wrap: wrap;
 `
 export const Form = styled(Container)`
@@ -43,7 +47,6 @@ export const HomeContainer = styled(Container)`
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    height: calc(100vh - 60px)    
 `
 export const GiftedPage = styled(Container)`
 
@@ -52,17 +55,33 @@ export const GiftListContainer = styled(Container)`
     
 `
 export const LoginContainer = styled(Container)`
-
     background-color: ${lighten(0.12, "#d5d5d5")}
+    section{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 40vw;
+        height: 60vh;
+        background-color: white;
+        box-shadow: 0px 0px 20px rgba(139, 139, 138, 0.938);
+        border-radius: 10%;
+        h3{
+            margin-bottom: 10px;
+        }
+    }
 `
 
 export const BUTTON = styled.button` 
+    display: flex;
+    align-items: center;
     padding: 8px;
     font-size: ${props=> props.fontSize};
     background-color: ${props => props.background};
     border: none;
     border-radius: 10px;
     outline: none;
+    color: ${props=> props.color};
     &:active{
         background-color: ${props=> props.background && darken(0.10, props.background)};
     }

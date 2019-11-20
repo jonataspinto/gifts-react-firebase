@@ -9,6 +9,7 @@ import Loading from '../../components/Loading'
 import { GiftedPage, ButtonAdd } from '../../styles'
 import { Icon } from '@material-ui/core';
 import {Lang} from '../../pt'
+import {userAuthenticated} from '../../auth'
 
 export default class GiftedContainer extends Component {
 
@@ -22,27 +23,17 @@ export default class GiftedContainer extends Component {
         user: null
     }
 
-    componentDidMount(){
-        this.authListener()
-        const req = firebase.database().ref('gifted')
-        req.on('value', (snapshot)=>{
+    async componentDidMount(){
+        userAuthenticated()
+        await this.setState({user: localStorage.getItem("user")})
+        firebase.database().ref('gifted')
+        .on('value', (snapshot)=>{
             let res = snapshot.val()
             this.setState({gifteds: res, loading: false})            
         })
-    }
-
-    authListener(){
-        firebase.auth().onAuthStateChanged((user)=> {         
-            if (user) {
-                this.setState({user})
-              console.log("User is signed in.")
-              console.log(this.state.user);
-              console.log(localStorage.getItem("user"))
-            }
-            // else{
-            //     localStorage.removeItem("user", user.displayName)
-            // }
-        });
+        // this.setState({user: localStorage.getItem("user")})
+        const ai =  localStorage.getItem("user")
+        console.log(ai.displayName)
     }
 
     toggleModal(){
@@ -65,6 +56,7 @@ export default class GiftedContainer extends Component {
     insertGifted(){
         firebase.database().ref('gifted').push(this.state.gifted)
     }
+
     render() {
         const { gifteds, gifted, modalWin, loading} = this.state
         return (
