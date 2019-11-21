@@ -35,17 +35,28 @@ export default class Home extends Component {
        
         return (
             <HomeContainer>  
-              { this.state.user.displayName &&
+              { this.state.user.displayName ?
                 <Button 
                value = {"Criar Lista"}
                fontSize="18px"
                backgroundBtn= "#bababa"
                to={{pathname:"/gifted"}}
             //    action={()=>{this.loginSocial()}}
+            />
+        :
+        <Button 
+            value = {"Ver Listas"}
+            fontSize="18px"
+            backgroundBtn= "#bababa"
+            to={{pathname:"/gifted", }}
+            //    action={()=>{this.loginSocial()}}
             ></Button>
-            }
+        }
+
+            
             </HomeContainer>
         )
     }
 }
 
+// to={{pathname:"/giftlist", state:{ giftedKey: key} }}

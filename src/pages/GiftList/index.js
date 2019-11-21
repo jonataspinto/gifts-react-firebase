@@ -36,7 +36,6 @@ export default class giftList extends Component {
 
     toggleModal(){
         this.setState({modalWin: !this.state.modalWin})
-        console.log("close")
     }
 
     onChange = (event)=>{
@@ -87,7 +86,7 @@ export default class giftList extends Component {
                 })
             }
 
-                <Modal showModal={modalWin}>{
+                <Modal showModal={modalWin} toggleModal={()=> this.toggleModal()}>{
                     modalContent === "card" ? 
                         <Card
                         imgSrc={itemSelected.imgSrc}

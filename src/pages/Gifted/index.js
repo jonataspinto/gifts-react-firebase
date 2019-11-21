@@ -6,10 +6,10 @@ import Input from '../../components/Input/input'
 import Card from '../../components/Card'
 import Modal from '../../components/Modal'
 import Loading from '../../components/Loading'
-import { GiftedPage, ButtonAdd } from '../../styles'
+import { GiftedPage, ButtonAdd, Img} from '../../styles'
 import { Icon } from '@material-ui/core';
 import {Lang} from '../../pt'
-import {userAuthenticated} from '../../auth'
+// import {userAuthenticated} from '../../auth'
 
 export default class GiftedContainer extends Component {
 
@@ -20,20 +20,22 @@ export default class GiftedContainer extends Component {
         modalWin: false,
         loading: true,
         name: "",
-        user: null
+        user: new Gifted()   
     }
 
     async componentDidMount(){
-        userAuthenticated()
-        await this.setState({user: localStorage.getItem("user")})
+        // userAuthenticated()
         firebase.database().ref('gifted')
         .on('value', (snapshot)=>{
             let res = snapshot.val()
             this.setState({gifteds: res, loading: false})            
         })
-        // this.setState({user: localStorage.getItem("user")})
-        const ai =  localStorage.getItem("user")
-        console.log(ai.displayName)
+
+        const user=  Object.assign({}, this.state.user)
+        user['name'] = localStorage.getItem("displayName")
+        user['imgSrc'] = localStorage.getItem("photoURL") + '?type=square&width=120&height=120'
+        await this.setState({user: user})
+        await console.log(this.state.user)
     }
 
     toggleModal(){
@@ -54,11 +56,12 @@ export default class GiftedContainer extends Component {
     }
 
     insertGifted(){
-        firebase.database().ref('gifted').push(this.state.gifted)
+        const send = this.state.user.name ? this.state.user : this.state.gifted
+        firebase.database().ref('gifted').push(send)
     }
 
     render() {
-        const { gifteds, gifted, modalWin, loading} = this.state
+        const { gifteds, gifted, modalWin, loading, user} = this.state
         return (
             <GiftedPage>  {
                 loading ? 
@@ -75,8 +78,13 @@ export default class GiftedContainer extends Component {
                     />
                 })}
 
-                <Modal showModal={modalWin}>
-                    <h1>{Lang.welcomeGifted}</h1>
+                <Modal showModal={modalWin} toggleModal={()=> this.toggleModal()}>
+                    <h1>{user.name? `${Lang.hello},  ${user.name}`: Lang.welcomeGifted}</h1>
+                    { user.imgSrc && <Img imgSrc={user.imgSrc}/>}
+                    
+                    { 
+                    !user.name &&
+                    <>
                     <Input
                         type="text"
                         name="name"
@@ -92,13 +100,16 @@ export default class GiftedContainer extends Component {
                         value={gifted.imgSrc}
                         onChange={this.onChange}
                     />
+                    </>
+                    }
 
                     <Button
                     action={this.onSubmit} 
                     value={Lang.create} 
                     fontSize={"18px"} 
                     backgroundBtn={"#bababa"}
-                    />      
+                    />                   
+                    
                 </Modal>
 
                 { loading ||
@@ -106,8 +117,7 @@ export default class GiftedContainer extends Component {
                     <Icon className={'fa fa-plus-circle'}  style={{ fontSize: 60, color: 'action' }}>
                         add_circle
                     </Icon>
-                </ButtonAdd> }  
-                  
+                </ButtonAdd> }                    
             </GiftedPage>
         )
     }

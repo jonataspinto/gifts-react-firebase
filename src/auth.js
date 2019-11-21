@@ -33,8 +33,9 @@ export const LoginFacebook = ()=>{
         localStorage.setItem("displayName", result.user.displayName)
         localStorage.setItem("photoURL", result.user.photoURL)
         localStorage.setItem("user", result.user)
-        console.log(result.user);        
-        return result.user
+        console.log(result.user); 
+        document.location.reload(true);       
+        return true
       })
       .catch(function(error) {
         // // Handle Errors here.

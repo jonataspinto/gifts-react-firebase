@@ -47,6 +47,9 @@ export const HomeContainer = styled(Container)`
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+    @media (max-width: 768px) {
+        background-image: none;
+    }
 `
 export const GiftedPage = styled(Container)`
 
@@ -61,11 +64,11 @@ export const LoginContainer = styled(Container)`
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 40vw;
+        width: 80vw;
         height: 60vh;
         background-color: white;
-        box-shadow: 0px 0px 20px rgba(139, 139, 138, 0.938);
-        border-radius: 10%;
+        box-shadow: 0px 0px 10px rgba(139, 139, 138, 0.938);
+        border-radius: 10px;
         h3{
             margin-bottom: 10px;
         }
