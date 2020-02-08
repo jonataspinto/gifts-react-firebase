@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {Navbar} from '../../styles'
-import {firebase} from '../../Firebase/index.js'
+import {Navbar} from './styles'
+import {firebase} from '../../services/Firebase/index.js'
 import Button from '../../components/Button'
-import {logOutFacebook} from '../../auth'
+import {logOutFacebook} from '../../services/auth'
 
 
 const Nav = (props) =>{

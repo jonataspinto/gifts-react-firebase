@@ -5,7 +5,7 @@ import GiftList from './pages/GiftList';
 import Nav from './components/NavBar';
 import GiftedContainer from './pages/Gifted';
 import Login from './pages/Login/login.js';
-import {userAuthenticated} from './auth'
+import {userAuthenticated} from './services/auth'
 
 const PrivateRoute = ({ component: Component, ...rest }) =>(
   <Route

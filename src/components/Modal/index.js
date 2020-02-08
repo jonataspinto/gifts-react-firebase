@@ -1,5 +1,5 @@
 import React from 'react';
-import {ModalContainer} from'../../styles';
+import {ModalContainer} from'./styles';
 import {Icon} from '@material-ui/core'
 // import Button from '../Button';
 

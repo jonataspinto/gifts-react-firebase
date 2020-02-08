@@ -1,10 +1,10 @@
 import React from 'react';
 import Button from '../Button/index'
-import {Img, Cards} from '../../styles'
+import {Img, Cards} from './styles'
 // import { Container } from './styles';
 
 export default function Card(props) {
-  const{action, value, fontSize, backgroundBtn, imgSrc, name, background, to} = props
+  const{action, value, fontSize, imgSrc, name, background, to} = props
   return (
     <Cards background={background}>
       <Img src={imgSrc}/>
@@ -13,8 +13,7 @@ export default function Card(props) {
         <Button 
           action={action} 
           value={value} 
-          fontSize={fontSize} 
-          backgroundBtn={backgroundBtn}
+          fontSize={fontSize}
           to= {to}
         />
       }
