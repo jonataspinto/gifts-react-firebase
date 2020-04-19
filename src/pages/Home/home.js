@@ -1,10 +1,12 @@
-import React, { Component, useState } from "react";
+import React, { Component, useState, useEffect } from "react";
 // import {firebase}from '../../Firebase/index.js'
 import Button from "../../components/Button";
 // import Input from '../../components/Input/input'
 // import Card from '../../components/Card'
 // import Modal from '../../components/Modal'
 import { HomeContainer } from "./styles";
+import { useSelector, useDispatch } from 'react-redux';
+import { getAll } from '../../store/gifted/gifted.action';
 
 const Home = props => {
   const [state, serState] = useState({
@@ -17,6 +19,12 @@ const Home = props => {
       photoURL: localStorage.getItem("photoURL")
     }
   });
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAll());
+  })
 
   const toggleModal = () => {
     this.setState({ modalWin: !this.state.modalWin });

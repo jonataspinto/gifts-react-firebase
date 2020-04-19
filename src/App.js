@@ -3,6 +3,8 @@ import { ThemeProvider } from 'styled-components'
 import Routers from'./Router';
 import { light, dark, GlobalStyle } from './styles/index'
 import usePersistedThemeState from './utils/usePersistedThemeState';
+import store from './store';
+import {Provider} from 'react-redux'
 
 const App = ()=>{
   const [theme, setTheme] = usePersistedThemeState('theme', light)
@@ -12,10 +14,12 @@ const App = ()=>{
     console.log(theme);    
   }
   return( 
-    <ThemeProvider theme={theme}>
-      <GlobalStyle/>    
-      <Routers/>
-    </ThemeProvider>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle/>    
+        <Routers/>
+      </ThemeProvider>
+    </Provider>
   )
 }
 
