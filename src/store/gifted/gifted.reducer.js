@@ -27,6 +27,22 @@ const giftedReducer = (state = initialState, action) => {
         loading: action.loading,
         message: action.message
       }
+    case TYPES.INSERT_NEW_GIFTED:
+      return {
+        ...state,
+        loading: action.loading,
+      }
+    case TYPES.INSERT_NEW_GIFTED_SUCCESS:
+      return {
+        ...state,
+        loading: action.loading,
+        message: action.message,
+      }
+    case TYPES.INSERT_NEW_GIFTED_FAIL:
+      return {
+        ...state,
+        message: action.message,
+      }
     default: 
       return state;
   }

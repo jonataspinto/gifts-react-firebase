@@ -1,5 +1,5 @@
 import { GIFTED_TYPES } from '../actionTypes';
-import { firebase } from '../../services/Firebase'
+import { api } from '../../services'
 
 const TYPES = GIFTED_TYPES;
 
@@ -10,19 +10,12 @@ export const getAll = () => async dispatch => {
   })
 
   try {
-    firebase
-    .database()
-    .ref("gifted")
-    .on("value", snapshot => {
-      let data = snapshot.val();
-      console.log(data)
-      dispatch({
-        loading: false,
-        type: TYPES.GET_ALL_GIFTED_SUCCESS,
-        gifteds: Object.keys(data).map(key => data[key] = {...data[key], key}),
-      })
-    });
-    
+    const data = await api.get()
+    dispatch({
+      loading: false,
+      type: TYPES.GET_ALL_GIFTED_SUCCESS,
+      gifteds: data,
+    })    
   } catch (error) {
     dispatch({
       loading: false,
@@ -30,3 +23,29 @@ export const getAll = () => async dispatch => {
     })
   }
 } 
+
+export const insert = newGifted => async dispatch => {
+  dispatch({
+    type: TYPES.INSERT_NEW_GIFTED,
+    loading: true,
+  });
+
+  try {
+    api.insertGifted(newGifted);
+    dispatch({
+      type: TYPES.INSERT_NEW_GIFTED_SUCCESS,
+      loading: false,
+      message: "Lista criada",
+    }, getAll());
+  } catch (error) {
+    dispatch({
+      type: TYPES.INSERT_NEW_GIFTED_FAIL,
+      loading: false,
+      message: error,
+    });
+  }
+}
+
+export const remove = key => async dispatch => {
+  api.removeGifted(key)
+}

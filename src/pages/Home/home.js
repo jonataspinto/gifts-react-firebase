@@ -1,38 +1,33 @@
-import React, { Component, useState, useEffect } from "react";
-// import {firebase}from '../../Firebase/index.js'
+import React, { useState, useEffect } from "react";
+import { useDispatch } from 'react-redux';
 import Button from "../../components/Button";
 // import Input from '../../components/Input/input'
 // import Card from '../../components/Card'
 // import Modal from '../../components/Modal'
 import { HomeContainer } from "./styles";
-import { useSelector, useDispatch } from 'react-redux';
 import { getAll } from '../../store/gifted/gifted.action';
 
 const Home = props => {
-  const [state, serState] = useState({
-    items: [],
-    modalWin: false,
-    name: "",
-    isLogged: false,
-    user: {
-      displayName: localStorage.getItem("displayName"),
-      photoURL: localStorage.getItem("photoURL")
-    }
-  });
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getAll());
+  const [user, setUser] = useState({
+    displayName: localStorage.getItem("displayName"),
+    photoURL: localStorage.getItem("photoURL")
   })
 
+  const [modalWin, setModalWin] = useState(false);
+
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(getAll());
+  }, [])
+
   const toggleModal = () => {
-    this.setState({ modalWin: !this.state.modalWin });
+    setModalWin(!modalWin);
   };
 
   return (
     <HomeContainer>
-      {state.user.displayName ? (
+      {user.displayName ? (
         <Button
           value={"Criar Lista"}
           fontSize="18px"

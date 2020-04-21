@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route, Redirect} from "react-router-dom";
 import Home from './pages/Home/home';
 import GiftList from './pages/GiftList';
 import Nav from './components/NavBar';
-import GiftedContainer from './pages/Gifted';
+import Gifted from './pages/Gifted';
 import Login from './pages/Login/login.js';
 import {userAuthenticated} from './services/auth'
 
@@ -29,7 +29,7 @@ const Routers = () =>{
         <Route path="/home" component={Home} />
         <Route path="/login" component={Login} />
         <PrivateRoute path="/giftlist" component={GiftList} />
-        <Route path="/gifted" component={GiftedContainer}/>
+        <Route path="/gifted" component={Gifted}/>
       </Switch>
     </BrowserRouter>
   );

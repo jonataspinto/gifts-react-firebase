@@ -1,4 +1,4 @@
-import {firebase} from './Firebase/index'
+import { firebase } from './Firebase'
 
 // export const authListener = ()=>{
 //     firebase.auth().onAuthStateChanged((user)=> {         
