@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { LoginContainer } from "./styles";
 import FacebookIcon from "@material-ui/icons/Facebook";
-import Button from "../../components/Button";
+import {Button} from "../../components/elements";
 import { Redirect } from "react-router-dom";
 import { LoginFacebook, userAuthenticated } from "../../services/auth";
 

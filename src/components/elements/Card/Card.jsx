@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from '../Button/index'
-import {Img, Cards} from './styles'
+import Button from '../Button'
+import {Img, Cards} from './CardStyle'
 // import { Container } from './styles';
 
 export default function Card(props) {

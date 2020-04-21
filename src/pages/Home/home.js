@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from 'react-redux';
-import Button from "../../components/Button";
+import {Button} from "../../components/elements";
 // import Input from '../../components/Input/input'
 // import Card from '../../components/Card'
 // import Modal from '../../components/Modal'

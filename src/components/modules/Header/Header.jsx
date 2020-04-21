@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {Navbar} from './styles'
-import {firebase} from '../../services/Firebase/index.js'
-import Button from '../../components/Button'
-import {logOutFacebook} from '../../services/auth'
+import {Navbar} from './HeaderStyled'
+import {firebase} from '../../../services/Firebase/index.js'
+import {Button} from '../../elements'
+import {logOutFacebook} from '../../../services/auth'
 
 
-const Nav = (props) =>{
+const Header = (props) =>{
   const [user, setUser] = useState(
     ''
   );
@@ -41,4 +41,4 @@ const Nav = (props) =>{
   );
 }
 
-export default Nav
+export default Header

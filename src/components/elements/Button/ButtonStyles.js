@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { darken, lighten } from "polished";
+import { darken } from "polished";
 
-export const BUTTON = styled.button`
+export const Button = styled.button`
   display: flex;
   align-items: center;
   padding: 8px;

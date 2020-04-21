@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import firebase from '../../services/Firebase/firebase.js'
-import Loading from '../../components/Loading'
-import Card from '../../components/Card'
-import Modal from '../../components/Modal'
-import Button from '../../components/Button'
-import Input from '../../components/Input/input'
+import {
+  Button,
+  Card,
+  Loading,
+  Input
+} from '../../components/elements'
+import {
+  Modal
+} from '../../components/modules'
 import Item from '../../models/Item'
 import {GiftListContainer, ButtonAdd, Form} from './styles'
 import {Lang} from '../../assets/constants/pt'
