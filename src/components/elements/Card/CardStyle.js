@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Cards = styled.div` 
+export const Cards = styled.div`
   display: flex;
   border: 1px ridge black;
   border-radius: 10px;
@@ -11,17 +11,17 @@ export const Cards = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  transition: .1s;
-  background-color: ${props => props.background};
-  &:hover{
+  transition: 0.1s;
+  background-color: ${(props) => props.background};
+  &:hover {
     background-color: #fff;
-    box-shadow: 0px 0px 20px rgba(139, 139, 138, 0.938); 
-    transition: .1s
+    box-shadow: 0px 0px 20px rgba(139, 139, 138, 0.938);
+    transition: 0.1s;
   }
-`
+`;
 
-export const Img= styled.img`
+export const Img = styled.img`
   width: 100px;
   height: 100px;
-  border-radius: 100%
-`
+  border-radius: 100%;
+`;

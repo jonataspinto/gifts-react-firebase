@@ -1,13 +1,20 @@
 import React from 'react';
-import * as S from './InputStyle'
+import { string, func } from 'prop-types';
+import * as S from './InputStyle';
 
-export default function Input(props) {
-  return (
-    <S.Input
-      type={props.type}
-      value={props.value}
-      name={props.name}
-      onChange={props.onChange}
-    />
-  );
-}
+const Input = ({ type, value, name, onChange }) => {
+  return <S.Input type={type} value={value} name={name} onChange={onChange} />;
+};
+
+Input.propTypes = {
+  type: string,
+  value: string.isRequired,
+  name: string.isRequired,
+  onChange: func.isRequired,
+};
+
+Input.defaultProps = {
+  type: 'text',
+};
+
+export default Input;

@@ -1,4 +1,4 @@
-export const dark = {
+const dark = {
   title: 'dark',
 
   colors: {
@@ -12,5 +12,7 @@ export const dark = {
     secondary: '#333'
   }
 };
+
+export default dark;
 
 // cores-> #6d7993, #d5d5d5, #96858f, #9099a2

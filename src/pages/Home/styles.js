@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { darken, lighten } from "polished";
+// import { darken, lighten } from "polished";
 import backgroundList from '../../assets/img/backgroundList.jpg';
 
 

@@ -1,23 +1,15 @@
 import { useState, useEffect } from "react"
 
 const usePersistedThemeState = (key, initialState) =>{
-  const [state, setState] = useState(()=> {
-
-    const themeStorage = localStorage.getItem(key)
-  
-    if(themeStorage){
-      return JSON.parse(themeStorage)
-    }else {
-      return initialState
-    }
-
-  })
+  const [state, setState] = useState(()=> {  
+    return localStorage.getItem(key) || initialState;
+  });
 
   useEffect(()=>{
-    localStorage.setItem(key, JSON.stringify(state))
-  },[key, state])
+    localStorage.setItem(key, state)
+  },[key, state]);
 
-  return[state, setState]
-}
+  return[state, setState];
+};
 
 export default usePersistedThemeState;

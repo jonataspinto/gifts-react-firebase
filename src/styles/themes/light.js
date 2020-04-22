@@ -1,4 +1,4 @@
-export const light = {
+const light = {
   title: 'light',
 
   colors: {
@@ -12,5 +12,7 @@ export const light = {
     secondary: '#6d7993'
   }
 };
+
+export default light;
 
 // cores-> #6d7993, #d5d5d5, #96858f, #9099a2
