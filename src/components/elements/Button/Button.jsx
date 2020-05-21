@@ -1,19 +1,23 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { func, node, bool, string } from 'prop-types';
 import * as S from './ButtonStyles';
 
-const Button = ({ action, value, fontSize, to, children }) => {
-  return to ? (
-    <Link to={to} style={{ textDecoration: 'none' }}>
-      <S.Button fontSize={fontSize} onClick={action}>
-        {value}
-      </S.Button>
-    </Link>
-  ) : (
-    <S.Button fontSize={fontSize} onClick={action}>
-      {value || children}
-    </S.Button>
-  );
+const Button = ({ children, action, color, isButtonLoading }) => (
+  <S.Button onClick={action} color={color} isButtonLoading={isButtonLoading}>
+    {children}
+  </S.Button>
+);
+
+Button.propTypes = {
+  children: node.isRequired,
+  action: func.isRequired,
+  color: string,
+  isButtonLoading: bool,
+};
+
+Button.defaultProps = {
+  color: 'primary',
+  isButtonLoading: false,
 };
 
 export default Button;

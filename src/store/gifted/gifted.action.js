@@ -1,5 +1,5 @@
 import { GIFTED_TYPES } from '../actionTypes';
-import { api } from '../../services'
+import { api } from '../../services';
 
 const TYPES = GIFTED_TYPES;
 
@@ -7,22 +7,22 @@ export const getAll = () => async dispatch => {
   dispatch({
     type: TYPES.GET_ALL_GIFTED,
     loading: true,
-  })
+  });
 
   try {
-    const data = await api.get()
+    const data = await api.get();
     dispatch({
       loading: false,
       type: TYPES.GET_ALL_GIFTED_SUCCESS,
       gifteds: data,
-    })    
+    });
   } catch (error) {
     dispatch({
       loading: false,
-      message: error
-    })
+      message: error,
+    });
   }
-} 
+};
 
 export const insert = newGifted => async dispatch => {
   dispatch({
@@ -32,11 +32,14 @@ export const insert = newGifted => async dispatch => {
 
   try {
     api.insertGifted(newGifted);
-    dispatch({
-      type: TYPES.INSERT_NEW_GIFTED_SUCCESS,
-      loading: false,
-      message: "Lista criada",
-    }, getAll());
+    dispatch(
+      {
+        type: TYPES.INSERT_NEW_GIFTED_SUCCESS,
+        loading: false,
+        message: 'Lista criada',
+      },
+      getAll()
+    );
   } catch (error) {
     dispatch({
       type: TYPES.INSERT_NEW_GIFTED_FAIL,
@@ -44,8 +47,8 @@ export const insert = newGifted => async dispatch => {
       message: error,
     });
   }
-}
+};
 
-export const remove = key => async dispatch => {
-  api.removeGifted(key)
-}
+export const remove = key => async () => {
+  api.removeGifted(key);
+};

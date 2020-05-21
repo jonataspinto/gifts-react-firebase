@@ -1,7 +1,5 @@
-import Modal from "./Modal";
-import Layout from './Layout'
+import Header from './Header';
+import Modal from './Modal';
+import Layout from './Layout';
 
-export {
-  Modal,
-  Layout,
-}
+export { Header, Layout, Modal };

@@ -5,8 +5,8 @@ const TYPES = GIFTED_TYPES;
 const initialState = {
   gifteds: [],
   loading: false,
-  message: ''
-}
+  message: '',
+};
 
 const giftedReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -25,25 +25,25 @@ const giftedReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: action.loading,
-        message: action.message
-      }
+        message: action.message,
+      };
     case TYPES.INSERT_NEW_GIFTED:
       return {
         ...state,
         loading: action.loading,
-      }
+      };
     case TYPES.INSERT_NEW_GIFTED_SUCCESS:
       return {
         ...state,
         loading: action.loading,
         message: action.message,
-      }
+      };
     case TYPES.INSERT_NEW_GIFTED_FAIL:
       return {
         ...state,
         message: action.message,
-      }
-    default: 
+      };
+    default:
       return state;
   }
 };

@@ -1,7 +1,7 @@
-import { firebase } from './Firebase'
+import { firebase } from './Firebase';
 
 // export const authListener = ()=>{
-//     firebase.auth().onAuthStateChanged((user)=> {         
+//     firebase.auth().onAuthStateChanged((user)=> {
 //         if (user) {
 //             this.setState({user: user})
 //             console.log(this.state.user)
@@ -12,7 +12,7 @@ import { firebase } from './Firebase'
 //         // else{
 //         //     localStorage.removeItem("user", user.displayName)
 //         // }
-//     });   
+//     });
 // }
 
 export const userAuthenticated = ()=>{
@@ -33,8 +33,8 @@ export const LoginFacebook = ()=>{
         localStorage.setItem("displayName", result.user.displayName)
         localStorage.setItem("photoURL", result.user.photoURL)
         localStorage.setItem("user", result.user)
-        console.log(result.user); 
-        document.location.reload(true);       
+        console.log(result.user);
+        document.location.reload(true);
         return true
       })
       .catch(function(error) {

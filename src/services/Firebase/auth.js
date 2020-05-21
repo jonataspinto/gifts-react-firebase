@@ -5,5 +5,5 @@ export const getAuth = () => {
 };
 
 export const facebookOAuth = () => {
-  return new firebase.firebase_.auth.FacebookAuthProvider();
+  return new firebase.auth.FacebookAuthProvider();
 };

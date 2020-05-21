@@ -1,23 +1,33 @@
 import React from 'react';
-import * as S from'./ModalStyle';
-import {Icon} from '@material-ui/core'
+import { bool, func, node } from 'prop-types';
+import { Icon } from '@material-ui/core';
+import * as S from './ModalStyle';
 
-const Modal = (props) => {
+const Modal = ({ showModal, toggleModal, children }) => {
   return (
-    <S.Modal style={{top: props.showModal ? 0 : "-100vh", color: "white"}}>
-      <Icon className={'fa fa-plus-circle'} 
-        onClick={props.toggleModal} 
-        style={{ 
+    <S.Modal showModal={showModal}>
+      <Icon
+        className="fa fa-plus-circle"
+        onClick={toggleModal}
+        style={{
           fontSize: '42px',
           position: 'absolute',
-          top:'0',
+          top: '0',
           right: '0',
-          margin: '20px'}}>
-          close
-        </Icon>
-      {props.children}
+          margin: '20px',
+        }}
+      >
+        close
+      </Icon>
+      {children}
     </S.Modal>
   );
-}
+};
+
+Modal.propTypes = {
+  showModal: bool.isRequired,
+  toggleModal: func.isRequired,
+  children: node.isRequired,
+};
 
 export default Modal;

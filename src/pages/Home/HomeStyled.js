@@ -1,7 +1,6 @@
 import styled from "styled-components";
 // import { darken, lighten } from "polished";
-import backgroundList from '../../assets/img/backgroundList.jpg';
-
+import { images } from '../../assets';
 
 const Container = styled.div`
   display: flex;
@@ -13,8 +12,8 @@ const Container = styled.div`
   flex-wrap: wrap;
 `;
 
-export const HomeContainer = styled(Container)`
-  background-image: url(${backgroundList});
+export const Home = styled(Container)`
+  background-image: url(${images.backgroundList});
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-position: center;

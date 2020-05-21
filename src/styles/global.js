@@ -6,6 +6,12 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box
   }
+
+  html, body, #root{
+    height: 100%;
+    width: 100%;
+  }
+
   body{
     background-color: ${(props) => props.theme.background.primary};
     color: ${(props) => props.theme.colors.text};
@@ -16,6 +22,10 @@ const GlobalStyle = createGlobalStyle`
     outline: none;
     border: none;
     cursor: pointer;
+  }
+
+  a {
+    text-decoration: none;
   }
 `;
 export default GlobalStyle;

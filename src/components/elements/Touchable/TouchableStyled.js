@@ -1,3 +1,3 @@
 import styled from 'styled-components';
 
-export const Touchable = styled.span;
+export const Touchable = styled.span``;

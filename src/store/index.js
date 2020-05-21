@@ -6,13 +6,13 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 const reducers = combineReducers({
   example: () => [],
   // theme: ()=>{},
-  giftedReducer: giftedReducer,
+  giftedReducer,
 });
 
 const store = createStore(
-    reducers,
-    {},
-    composeWithDevTools(applyMiddleware(ReduxThunk))
-)
+  reducers,
+  {},
+  composeWithDevTools(applyMiddleware(ReduxThunk))
+);
 
 export default store;
